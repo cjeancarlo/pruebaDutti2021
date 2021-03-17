@@ -1,4 +1,4 @@
-<div class="col-md-5 col-md-offset-5 container mt-5">
+<div class="col-md-5 col-md-offset-5 container mt-5 animated fadeInLeft">
     <h2 class="text-center">Iniciar sesión</h2>
     <p class="text-center">Introduzca su correo y contraseña para acceder</p>
     <form [formGroup]="loginForm" (ngSubmit)="loginUser()" class="form">
@@ -6,12 +6,12 @@
             <input
                 type="text"
                 class="form-control"
-                placeholder="Username"
-                formControlName="username"/>
+                placeholder="email"
+                formControlName="email"/>
                 <hr class="hr-line">
-            <div class="input-group-append form__required" *ngIf="loginForm.get('username').invalid">
-                <span class="colorInvalid">
-                    <i>Username is required</i>
+            <div class="input-group-append form__required" *ngIf="loginForm.get('email').invalid">
+                <span class="colorInvalid animated fadeIn">
+                    <i>email is required</i>
                 </span>
             </div>
         </div>
@@ -24,7 +24,7 @@
             formControlName="password"/>
             <hr class="hr-line">
             <div class="input-group-append form__required" *ngIf="loginForm.get('password').invalid">
-                <span class="colorInvalid">
+                <span class="colorInvalid animated fadeIn">
                     <i>Password is required</i>
                 </span>
             </div>
@@ -39,7 +39,7 @@
             <!-- <button type="button" class="btn buttons__register" routerLink="/register">Iniciar sesión</button> -->
         </div>
         <div class="input-group-append" *ngIf="unregistered">
-            <span class="colorInvalid">
+            <span class="colorInvalid animated fadeIn">
                 <i>Unregistered user</i>
             </span>
         </div>

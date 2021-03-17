@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
 
 
 
@@ -12,7 +14,8 @@ const COREMODULE: any[] = [
   FormsModule,
   ReactiveFormsModule,
   HttpClientModule,
-  NgxPaginationModule
+  NgxPaginationModule,
+  SweetAlert2Module
   
 ];
 @NgModule({

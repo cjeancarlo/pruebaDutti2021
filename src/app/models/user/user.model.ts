@@ -1,7 +1,5 @@
 export  class UserModel {
-    first_name: string;
-    last_name: string;
-    username : string;
+    name: string;
     email: string;
     password: string;
     
