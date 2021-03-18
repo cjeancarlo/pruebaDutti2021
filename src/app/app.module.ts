@@ -1,10 +1,19 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { PrincipalModule } from './components/principal/principal.module';
 
+
+import { StoreModule } from '@ngrx/store';
+
+import { PrincipalModule } from './components/principal/principal.module';
 // Components
 import { AppComponent } from './app.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+//environment
+import { environment } from 'src/environments/environment';
+import { appReducers } from './store/app.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { effectsArray } from './store/effects';
 
 
 
@@ -17,7 +26,14 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    PrincipalModule
+    PrincipalModule,
+    StoreModule.forRoot(appReducers),
+    EffectsModule.forRoot(effectsArray),
+    // Instrumentation must be imported after importing StoreModule (config is optional)
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+    }),
 
   ],
   providers: [],
