@@ -7,11 +7,6 @@ import { list_loading, list_success, list_fail } from '../actions';
 import { Ships } from 'src/app/models/ships.model';
 
 
-export interface ShipsAppState extends AppState {
-  data: shipsState;
-}
-
-
 export interface shipsState {
   ships: Ships[];
   loaded: boolean;
