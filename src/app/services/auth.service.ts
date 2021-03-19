@@ -56,8 +56,6 @@ export class AuthService {
     today.setSeconds(3600);
 
     localStorage.setItem('expired', today.getTime().toString() );
-    
-
   }
 
   readToken() {
