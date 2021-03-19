@@ -10,21 +10,26 @@ import { ShipsDetailsComponent } from '../ships/ships-details/ships-details.comp
 import { PrincipalComponent } from './principal.component';
 
 //NRX
+import { ShipCardComponent } from '../ships/ship-card/ship-card.component';
+import { ShipInfoDetailComponent } from '../ships/ship-info-detail/ship-info-detail.component';
+import { personCardComponent } from '../person-card/person-card.component';
+import { VehiclesCardComponent } from '../vehicles-card/vehicles-card.component';
 
-import { StoreModule } from '@ngrx/store';
-import { shipsReducer } from 'src/app/store/reducers/ships.reducer';
 
 @NgModule({
   declarations: [
     PrincipalComponent,
     ShipsComponent,
     ShipsDetailsComponent,
+    ShipCardComponent,
+    ShipInfoDetailComponent,
+    personCardComponent,
+    VehiclesCardComponent,
     PageOneComponent,
     PageTwoComponent
   ],
   imports: [
     ShareModule,
-    StoreModule.forFeature('data', shipsReducer),
     PrincipalComponentsRoutingModule
   ],
 

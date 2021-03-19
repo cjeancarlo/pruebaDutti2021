@@ -19,7 +19,7 @@ export class ShipCardComponent implements OnInit {
   }
 
   get starshipId() {
-    return this.shipService.getStarshipId(this.ship);
+    return this.shipService.getObjId(this.ship);
   }
 
 

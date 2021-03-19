@@ -25,13 +25,13 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.registerForm = this.fb.group({
       name: [ '', [Validators.required, Validators.minLength(3)]],
-      email: [ '', [Validators.required, Validators.minLength(6)]],
+      email: [ '', [Validators.required, Validators.email ,Validators.minLength(6)]],
       password: [ '', [Validators.required, Validators.minLength(6)]],
 
     })
   }
 
-  registerUser() {
+  registerUser() :boolean {
     if (this.registerForm.invalid) { return }
     
     Swal.fire({
@@ -44,7 +44,9 @@ export class RegisterComponent implements OnInit {
 
     this.auth.newUser( this.registerForm.value ).subscribe( response => {
       Swal.close();
+
       this.router.navigate(['/principal/ships']);
+      return true;
       
   }, (err) => {
     Swal.fire({
@@ -56,10 +58,7 @@ export class RegisterComponent implements OnInit {
 
   })
 
-    // var userLogin = this.registerForm.value;
-    // usersList.push(userLogin)
-    // console.log('User Register -->', usersList)
-    // this.router.navigate(['/principal/ships'])
+   
 
   }
 

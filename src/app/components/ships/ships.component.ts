@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ShipsService } from 'src/app/services/ships.service';
 import { AppState } from 'src/app/store/app.reducers';
 
 import { list_loading} from '../../store/actions'

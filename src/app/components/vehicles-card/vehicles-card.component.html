@@ -1,0 +1,30 @@
+<mat-card class="vehicle-card animated fadeIn">
+    <mat-card-header>
+      <div mat-card-avatar class="vehicle-header-image"></div>
+      <mat-card-title>{{vehicle.name}}</mat-card-title>
+      <mat-card-subtitle>Model:  {{vehicle.model}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image 
+    
+    onError="this.src='assets/img/errorImg_x3.svg'"
+    src="https://starwars-visualguide.com/assets/img/vehicles/{{vehicleId}}.jpg" 
+    alt="{{vehicle.name}}"
+    
+    >
+    <mat-card-content>
+      
+      <div  fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center" >
+      <div *ngFor="let film of vehicle.films" >
+      <img  class="vehicle-film-image"
+      onError="this.src='assets/img/errorImg_x3.svg'"
+      src="https://starwars-visualguide.com/assets/img/films/{{getFilmId(film)}}.jpg" 
+      alt="{{vehicle.name}}"
+      >
+    </div>
+    </div>
+        
+        
+      
+    </mat-card-content>
+    
+  </mat-card>

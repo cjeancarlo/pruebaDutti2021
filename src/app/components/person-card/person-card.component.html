@@ -1,0 +1,30 @@
+<mat-card class="people-card animated fadeIn">
+    <mat-card-header>
+      <div mat-card-avatar class="people-header-image"></div>
+      <mat-card-title>{{person.name}}</mat-card-title>
+      <mat-card-subtitle>Altura:  {{person.height}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image 
+    
+    onError="this.src='assets/img/errorImg_x3.svg'"
+    src="https://starwars-visualguide.com/assets/img/characters/{{personId}}.jpg" 
+    alt="{{person.name}}"
+    
+    >
+    <mat-card-content>
+      
+      <div  fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center" >
+      <div *ngFor="let film of person.films" >
+      <img  class="people-film-image"
+      onError="this.src='assets/img/errorImg_x3.svg'"
+      src="https://starwars-visualguide.com/assets/img/films/{{getFilmId(film)}}.jpg" 
+      alt="{{person.name}}"
+      >
+    </div>
+    </div>
+        
+        
+      
+    </mat-card-content>
+    
+  </mat-card>

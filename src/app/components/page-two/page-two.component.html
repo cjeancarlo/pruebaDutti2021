@@ -1,1 +1,14 @@
-<p>page-two works!</p>
+<div fxLayout="column" fxLayoutAlign="center center">
+  <mat-spinner *ngIf="loading"></mat-spinner>
+</div>
+<div *ngIf="loaded">
+
+  
+  <div fxLayout="row wrap" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px"
+    fxLayoutGap.xs="0">
+
+    <div *ngFor="let person of people; let i = index">
+      <app-person-card [person]="person"></app-person-card>
+    </div>
+  </div>
+</div>

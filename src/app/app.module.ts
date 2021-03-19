@@ -14,15 +14,15 @@ import { environment } from 'src/environments/environment';
 import { appReducers } from './store/app.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { effectsArray } from './store/effects';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    
-    
-  ],
+],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -34,6 +34,7 @@ import { effectsArray } from './store/effects';
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
+    BrowserAnimationsModule,
 
   ],
   providers: [],

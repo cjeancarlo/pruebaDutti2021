@@ -3,7 +3,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserModel } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
-import  Swal  from 'sweetalert2';
+import Swal from 'sweetalert2';
 
 
 // JSON
@@ -32,18 +32,16 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
-    
-
-
     this.loginForm = this.fb.group({
-      email: [ '', [Validators.required, Validators.minLength(3)]],
-      password: [ '', [Validators.required, Validators.minLength(6)]]
+      email: ['', [Validators.required, Validators.email, Validators.minLength(3)]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
     })
   }
-  loginUser() {
 
-    
-    if (this.loginForm.invalid) { return }
+
+  loginUser(): boolean {
+
+    if (this.loginForm.invalid) { return false }
 
     Swal.fire({
       allowOutsideClick: false,
@@ -53,18 +51,19 @@ export class LoginComponent implements OnInit {
     Swal.showLoading();
 
 
-      this.auth.login( this.loginForm.value).subscribe( response => {
-        Swal.close();
-        this.router.navigate(['/principal/ships']);
-        
+    this.auth.login(this.loginForm.value).subscribe(response => {
+      Swal.close();
+      this.router.navigate(['/principal/ships']);
+      return true;
+
     }, (err) => {
       Swal.fire({
         icon: 'error',
         title: 'ERROR',
         text: 'wrong username or password'
       });
-      
 
+      return false;
     })
 
     // TODO : Falta integrar el servicio para autentificar al usuario
