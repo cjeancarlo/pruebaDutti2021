@@ -2,24 +2,13 @@
   <mat-spinner *ngIf="loading"></mat-spinner>
 </div>
 <div *ngIf="loaded">
-
-  
-  
   <div fxLayout="row" fxLayoutAlign="center center" >
     <pagination-controls (pageChange)="pageChanged($event)" class="text-center"></pagination-controls>  
   </div>
 
   <div fxLayout="row wrap" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
-
-    
-    
-    
     <div *ngFor="let ships of dataList | paginate: config; ; let i = index" >
       <app-ship-card [ship]="ships"></app-ship-card>
     </div>
   </div>
-
-
-
-
 </div>

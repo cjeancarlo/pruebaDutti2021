@@ -9,6 +9,9 @@ export interface vehiclesState {
   loaded: boolean;
   loading: boolean;
   errors: any;
+  count: number;
+  next: string;
+  previous: string;
 
 }
 
@@ -17,6 +20,9 @@ const initState: vehiclesState = {
   loaded: false,
   loading: false,
   errors: null,
+  count: 0,
+  next: '', 
+  previous: ''
 }
 
 const _listLoading = (state: vehiclesState) => {
@@ -31,7 +37,10 @@ const _listsuccess = (state: vehiclesState, { vehicles  }) => {
     ...state,
     loading: false,
     loaded: true,
-    vehicles: [...vehicles]
+    vehicles: [...vehicles.results],
+    count: vehicles.count,
+    next: vehicles.next,
+    previous:  vehicles.previous
   }
 }
 

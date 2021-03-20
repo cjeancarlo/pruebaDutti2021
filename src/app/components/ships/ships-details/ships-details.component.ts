@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Ships } from 'src/app/models/ships.model';
+import { ShipsService } from 'src/app/services/ships.service';
+import { list_loading } from 'src/app/store/actions';
 import { AppState } from 'src/app/store/app.reducers';
 
 declare var $: any;
@@ -20,13 +22,21 @@ export class ShipsDetailsComponent implements OnInit {
 
   loading = false;
   loaded = false;
+  totalItems = 0;
 
   // Modal
   titleDetails: string = '';
   modelDetails: string = '';
   starship_class: string = '';
 
-  constructor(private store: Store<AppState>) { 
+  constructor(private shipService: ShipsService, private store: Store<AppState>) { 
+  
+    this.config = {
+      itemsPerPage: 10,
+      currentPage: 1,
+      totalItems: this.totalItems
+    };
+ 
   }
   
   ngOnInit(): void {
@@ -36,13 +46,12 @@ export class ShipsDetailsComponent implements OnInit {
       this.loading = data.loading;
       this.loaded = data.loaded;
       this.dataList = data.ships;
-    })
+      this.totalItems = data.count;
 
-      this.config = {
-        itemsPerPage: 5,
-        currentPage: 1,
-        totalItems: this.dataList.length
-      };
+      this.config.totalItems = data.count;
+ 
+    });
+
   }
 
 
@@ -54,6 +63,8 @@ export class ShipsDetailsComponent implements OnInit {
 
   pageChanged(event){
     this.config.currentPage = event;
+    this.shipService.page.next(event);
+    this.store.dispatch(list_loading());
   }
 
   openDetails(details) {

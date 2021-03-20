@@ -15,10 +15,18 @@ export class PageTwoComponent implements OnInit {
   people: Person[];
   loading = false;
   loaded = false;
+  config: any;
 
-  constructor( private store: Store<AppState>) { }
+  constructor( private shipService: ShipsService, private store: Store<AppState>) { }
 
   ngOnInit(): void {
+
+    this.config = {
+      itemsPerPage: 10,
+      currentPage: 1,
+      totalItems: 0
+    };
+
       this.store.dispatch(people_list_loading());
       
       this.store.select('people').subscribe( people => {
@@ -26,10 +34,18 @@ export class PageTwoComponent implements OnInit {
         this.people = people.people;
           this.loading = people.loading;
           this.loaded = people.loaded;
+          this.config.totalItems = people.count;
       })
 
   }
 
+
+  pageChanged(event){
+    console.log(event)
+    this.config.currentPage = event;
+    this.shipService.page.next(event);
+    this.store.dispatch(people_list_loading());
+ }
 
  
 }

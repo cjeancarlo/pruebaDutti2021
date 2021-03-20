@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { Person } from 'src/app/models/person.model';
+import { PeopleResponse } from 'src/app/models/people.response.model';
+
 
 export const people_list_loading = createAction(
   '[LIST PEOPLE] loading list'
@@ -7,7 +8,7 @@ export const people_list_loading = createAction(
 
 export const people_list_success = createAction(
   '[LIST PEOPLE] list success',
-  props<{ people: Person[] }>()
+  props<{ people: PeopleResponse }>()
 );
 
 export const people_list_fail = createAction(

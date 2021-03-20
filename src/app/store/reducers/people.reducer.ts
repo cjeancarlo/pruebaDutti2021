@@ -10,6 +10,9 @@ export interface peopleState {
   loaded: boolean;
   loading: boolean;
   errors: any;
+  count: number;
+  next: string;
+  previous: string;
 
 }
 
@@ -18,6 +21,9 @@ const initState: peopleState = {
   loaded: false,
   loading: false,
   errors: null,
+  count: 0,
+  next: '', 
+  previous: ''
 }
 
 const _listLoading = (state: peopleState) => {
@@ -32,7 +38,10 @@ const _listsuccess = (state: peopleState, { people  }) => {
     ...state,
     loading: false,
     loaded: true,
-    people: [...people]
+    people: [...people.results],
+    count: people.count,
+    next: people.next,
+    previous:  people.previous
   }
 }
 

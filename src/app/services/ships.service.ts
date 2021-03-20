@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Observable, of, zip } from 'rxjs';
-import { catchError, map, mergeMap, publishReplay, refCount, switchMap, tap, toArray } from 'rxjs/operators'
+import { BehaviorSubject, EMPTY, Observable, of, Subject, zip } from 'rxjs';
+import { catchError, map, expand, publishReplay, refCount, switchMap, tap, toArray } from 'rxjs/operators'
 import { ShipsResponse } from '../models/ships.response.model';
 import { Ships } from '../models/ships.model';
 import { PeopleResponse } from '../models/people.response.model';
 import { Person } from '../models/person.model';
 import { VehicleResponse } from '../models/vehicle.response.model';
 import { Vehicle } from '../models/vehicle.model';
+import { Store } from '@ngrx/store';
+import { AppState } from '../store/app.reducers';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,8 @@ import { Vehicle } from '../models/vehicle.model';
 export class ShipsService {
 
   url: string = 'https://swapi.dev/api';
+
+  page = new BehaviorSubject(1)
 
   private cache:{
     ships$?: Observable<any>
@@ -31,27 +35,27 @@ export class ShipsService {
     headers: new HttpHeaders(this.headerDict), 
   };
   
-  constructor( private http: HttpClient ) {}
+  constructor( private http: HttpClient, private store: Store<AppState> ) {}
 
-  getPeople(): Observable<PeopleResponse> {
-      if (!this.cache.people$) {
-        this.cache.people$ = this.getRequest('people')
-      }
+  getPeople(page: number= 1): Observable<PeopleResponse> {
+      //if (!this.cache.people$) {
+        this.cache.people$ = this.getRequest(`people/?page=${page}`)
+      //}
       return this.cache.people$ as Observable<PeopleResponse>;
   }
 
-  getShips(): Observable<ShipsResponse> {
-    if (!this.cache.ships$) {
-        this.cache.ships$ = this.getRequest('starships');
-    }
+  getShips(page: number= 1): Observable<ShipsResponse> {
+    //if (!this.cache.ships$) {
+        this.cache.ships$ = this.getRequest(`starships/?page=${page}`);
+    //}
     return this.cache.ships$ as Observable<ShipsResponse>;
   }
 
 
-  getVehicles(): Observable<VehicleResponse> {
-    if (!this.cache.vehicle$) {
-        this.cache.vehicle$ = this.getRequest('vehicles');
-    }
+  getVehicles(page: number= 1): Observable<VehicleResponse> {
+    //if (!this.cache.vehicle$) {
+        this.cache.vehicle$ = this.getRequest(`vehicles/?page=${page}`);
+    //}
     return this.cache.vehicle$ as Observable<VehicleResponse>;
   }
 
@@ -62,6 +66,9 @@ export class ShipsService {
     const _url = !fullUrl ? `${this.url}/${url}`:  url;
 
     return this.http.get<any>( _url).pipe( 
+    //   expand((data, i) => {
+    //     return data.next ? this.getPage(data.next) : EMPTY;
+    // }),
     map( data =>  data ),
     publishReplay(1), // this tells Rx to cache the latest emitted
     refCount(), // and this tells Rx to keep the Observable alive as long as there are any Subscribers
@@ -77,6 +84,11 @@ export class ShipsService {
   public getObjIdFromString(url: string ): string {
     return url.split('/').filter(item => item !== '').slice(-1)[0];
   }
+
+  
+  
+  public page$ = this.page.asObservable();
+
 
   
 

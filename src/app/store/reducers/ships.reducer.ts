@@ -1,10 +1,8 @@
 
 import { createReducer, on } from '@ngrx/store';
-import { AppState } from 'src/app/store/app.reducers'
-
 import { list_loading, list_success, list_fail } from '../actions';
-
 import { Ships } from 'src/app/models/ships.model';
+
 
 
 export interface shipsState {
@@ -12,6 +10,9 @@ export interface shipsState {
   loaded: boolean;
   loading: boolean;
   errors: any;
+  count: number;
+  next: string;
+  previous: string;
 
 }
 
@@ -20,6 +21,10 @@ const initState: shipsState = {
   loaded: false,
   loading: false,
   errors: null,
+  count: 0,
+  next: '', 
+  previous: ''
+
 }
 
 const _listLoading = (state: shipsState) => {
@@ -34,7 +39,11 @@ const _listsuccess = (state: shipsState, { ships  }) => {
     ...state,
     loading: false,
     loaded: true,
-    ships: [...ships]
+    ships: [...ships.results],
+    count: ships.count,
+    next: ships.next,
+    previous:  ships.previous
+    
   }
 }
 

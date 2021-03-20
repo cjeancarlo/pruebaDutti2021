@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Vehicle } from 'src/app/models/vehicle.model';
+import { VehicleResponse } from 'src/app/models/vehicle.response.model';
 
 
 
@@ -9,7 +9,7 @@ export const vehicle_list_loading = createAction(
 
 export const vehicle_list_success = createAction(
   '[LIST VEHICLE] list success',
-  props<{ vehicles: Vehicle[] }>()
+  props<{ vehicles: VehicleResponse }>()
 );
 
 export const vehicle_list_fail = createAction(
