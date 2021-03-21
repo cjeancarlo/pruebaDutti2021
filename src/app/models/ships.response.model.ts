@@ -1,9 +1,9 @@
-import { Ships } from "./ships.model";
+import { Ships } from './ships.model';
 
 export interface ShipsResponse {
-    count:    number;
-    next:     string;
+    count: number;
+    next: string;
     previous: string;
-    results:  Ships[];
+    results: Ships[];
 }
 

@@ -11,9 +11,9 @@ describe('LoginComponent', () => {
   let fixture: ComponentFixture<LoginComponent>;
   let router: Router;
 
-  const authServiceMock ={
-     isAuth:function(){ return  true}
- }
+  const authServiceMock = {
+    isAuth: function () { return true; }
+  };
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -43,38 +43,38 @@ describe('LoginComponent', () => {
   });
 
   it('password field validity', () => {
-    let password = component.loginForm.controls['password'];
+    const password = component.loginForm.controls['password'];
     expect(password.valid).toBeFalsy();
 
-    password.setValue("");
+    password.setValue('');
     expect(password.hasError('required')).toBeTruthy();
-    password.setValue("A");
+    password.setValue('A');
     expect(password.hasError('minlength', ['minlength'])).toEqual(false);
   });
 
   it('email field validity', () => {
-    let email = component.loginForm.controls['email'];
+    const email = component.loginForm.controls['email'];
     expect(email.valid).toBeFalsy();
 
-    email.setValue("");
+    email.setValue('');
     expect(email.hasError('required')).toBeTruthy();
-    email.setValue("A");
+    email.setValue('A');
     expect(email.hasError('minlength', ['minlength'])).toEqual(false);
-    email.setValue("badEmail");
+    email.setValue('badEmail');
     expect(email.hasError('email')).toBeTruthy();
   });
 
   it('submitting a form login  user', () => {
     expect(component.loginForm.valid).toBeFalsy();
-    component.loginForm.controls['email'].setValue("test@test.com");
-    component.loginForm.controls['password'].setValue("123456789");
+    component.loginForm.controls['email'].setValue('test@test.com');
+    component.loginForm.controls['password'].setValue('123456789');
     expect(component.loginForm.valid).toBeTruthy();
   });
 
 
   it('valid credentials login   user', () => {
-    component.loginForm.controls['email'].setValue("jean@gmail.com");
-    component.loginForm.controls['password'].setValue("jecvjecvjecv");
+    component.loginForm.controls['email'].setValue('jean@gmail.com');
+    component.loginForm.controls['password'].setValue('jecvjecvjecv');
     expect(authServiceMock.isAuth()).toBeTruthy();
   });
 

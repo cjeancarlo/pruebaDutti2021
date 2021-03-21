@@ -21,11 +21,11 @@ export class AuthService {
     const auth = {
       ...usuario,
       returnSecureToken: true
-    }
+    };
     return this.http.post(`${this.url}signUp?key=${this.APIKEY}`, auth)
       .pipe(
         map(response => {
-          this.saveToken(response['idToken'])
+          this.saveToken(response['idToken']);
           return response;
 
         })
@@ -38,10 +38,10 @@ export class AuthService {
     const auth = {
       ...usuario,
       returnSecureToken: true
-    }
+    };
     return this.http.post(`${this.url}signInWithPassword?key=${this.APIKEY}`, auth).pipe(
       map(response => {
-        this.saveToken(response['idToken'])
+        this.saveToken(response['idToken']);
         return response;
 
       })
@@ -55,7 +55,7 @@ export class AuthService {
     const today = new Date();
     today.setSeconds(3600);
 
-    localStorage.setItem('expired', today.getTime().toString() );
+    localStorage.setItem('expired', today.getTime().toString());
   }
 
   readToken() {
@@ -64,21 +64,19 @@ export class AuthService {
 
   isAuth(): boolean {
 
-    const expired  = Number(localStorage.getItem('expired'));
+    const expired = Number(localStorage.getItem('expired'));
     const expiredDate = new Date();
     expiredDate.setTime(expired);
 
-    if (this.token.length < 2 ) {
-      
+    if (this.token.length < 2) {
       return false;
     }
-  console.log(expiredDate > new Date ());
-    return   (expiredDate > new Date () ) ?  true : false;
-    
+    console.log(expiredDate > new Date());
+    return (expiredDate > new Date()) ? true : false;
+
   }
 
   logOut() {
-      localStorage.removeItem('token');
-   }
-
+    localStorage.removeItem('token');
+  }
 }

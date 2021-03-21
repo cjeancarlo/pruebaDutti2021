@@ -1,11 +1,11 @@
 
 import { createReducer, on } from '@ngrx/store';
-import { people_list_success,people_list_loading, people_list_fail } from '../actions';
+import { PeopleListSuccess, PeopleListLoading, PeopleListFail } from '../actions';
 import { Person } from 'src/app/models/person.model';
 
 
 
-export interface peopleState {
+export interface PeopleState {
   people: Person[];
   loaded: boolean;
   loading: boolean;
@@ -13,27 +13,26 @@ export interface peopleState {
   count: number;
   next: string;
   previous: string;
-
 }
 
-const initState: peopleState = {
+const initState: PeopleState = {
   people: [],
   loaded: false,
   loading: false,
   errors: null,
   count: 0,
-  next: '', 
+  next: '',
   previous: ''
-}
+};
 
-const _listLoading = (state: peopleState) => {
+const listLoading = (state: PeopleState) => {
   return {
     ...state,
     loading: true
-  }
-}
+  };
+};
 
-const _listsuccess = (state: peopleState, { people  }) => {
+const listsuccess = (state: PeopleState, { people }) => {
   return {
     ...state,
     loading: false,
@@ -41,12 +40,12 @@ const _listsuccess = (state: peopleState, { people  }) => {
     people: [...people.results],
     count: people.count,
     next: people.next,
-    previous:  people.previous
-  }
-}
+    previous: people.previous
+  };
+};
 
 
-const _listfail  = (state: peopleState, { error }) => {
+const listfail = (state: PeopleState, { error }) => {
   return {
     ...state,
     loading: false,
@@ -55,16 +54,16 @@ const _listfail  = (state: peopleState, { error }) => {
       status: error.status,
       message: error.message
     }
-  }
-}
+  };
+};
 
-const _peopleReducer = createReducer(
+const PEOPLEREDUCER = createReducer(
   initState,
-  on(people_list_loading, _listLoading),
-  on(people_list_fail, _listfail),
-  on(people_list_success, _listsuccess)
+  on(PeopleListLoading, listLoading),
+  on(PeopleListFail, listfail),
+  on(PeopleListSuccess, listsuccess)
 );
 
 export function peopleReducer(state, action) {
-  return _peopleReducer(state, action);
+  return PEOPLEREDUCER(state, action);
 }

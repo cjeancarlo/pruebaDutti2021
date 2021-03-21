@@ -10,31 +10,30 @@ import { StoreModule } from '@ngrx/store';
 describe('ShipsComponent', () => {
   let component: ShipsComponent;
   let fixture: ComponentFixture<ShipsComponent>;
-  const serviceMock ={
-    getShips:function(){ return  new BehaviorSubject([])}
-    
-  }
+  const serviceMock = {
+    getShips: function () { return new BehaviorSubject([]) };
+  };
 
-  
+
   @Component({
     selector: 'ships-details',
     template: '<p>Mock Ship Details</p>'
   })
   class MockShipDetails {
-    @Input() dataList:any;
+    @Input() dataList: any;
   }
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShipsComponent,MockShipDetails ],
+      declarations: [ShipsComponent, MockShipDetails],
       imports: [
         StoreModule.forRoot(appReducers),
       ],
-      providers:[
-        {provide: ShipsService, useValue: serviceMock} 
+      providers: [
+        { provide: ShipsService, useValue: serviceMock }
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

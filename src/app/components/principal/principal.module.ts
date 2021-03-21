@@ -12,7 +12,7 @@ import { PrincipalComponent } from './principal.component';
 //NRX
 import { ShipCardComponent } from '../ships/ship-card/ship-card.component';
 import { ShipInfoDetailComponent } from '../ships/ship-info-detail/ship-info-detail.component';
-import { personCardComponent } from '../person-card/person-card.component';
+import { PersonCardComponent } from '../person-card/person-card.component';
 import { VehiclesCardComponent } from '../vehicles-card/vehicles-card.component';
 
 
@@ -23,7 +23,7 @@ import { VehiclesCardComponent } from '../vehicles-card/vehicles-card.component'
     ShipsDetailsComponent,
     ShipCardComponent,
     ShipInfoDetailComponent,
-    personCardComponent,
+    PersonCardComponent,
     VehiclesCardComponent,
     PageOneComponent,
     PageTwoComponent
@@ -32,7 +32,5 @@ import { VehiclesCardComponent } from '../vehicles-card/vehicles-card.component'
     ShareModule,
     PrincipalComponentsRoutingModule
   ],
-
-
 })
 export class PrincipalModule { }

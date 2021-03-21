@@ -7,13 +7,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ShipInfoDetailComponent } from './ship-info-detail.component';
 
-
-
-
 describe('ShipInfoDetailComponent', () => {
-  
 
-    
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -21,21 +16,21 @@ describe('ShipInfoDetailComponent', () => {
       ],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
-        {provide: MatDialogRef, useValue: {}},
+        { provide: MatDialogRef, useValue: {} },
       ],
       imports: [
-        HttpClientTestingModule, 
+        HttpClientTestingModule,
         MatDialogModule,
         MatTabsModule, FlexLayoutModule, MatCardModule, MatIconModule
       ]
     }).compileComponents();
-    
-    
+
+
   }));
 
   it('should create', () => {
     const fixture = TestBed.createComponent(ShipInfoDetailComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
-  });  
+  });
 });

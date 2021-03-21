@@ -5,18 +5,18 @@ import { of } from 'rxjs';
 import { map, mergeMap, catchError, tap, switchMap } from 'rxjs/operators';
 import { ShipsService } from 'src/app/services/ships.service';
 
-import { vehicle_list_fail, vehicle_list_loading, vehicle_list_success } from '../actions'
+import { VehicleListFail, VehicleListLoading, VehicleListSuccess } from '../actions';
 @Injectable()
-export class vehicleEffects {
+export class VehicleEffects {
 
 
   loadvehicle$ = createEffect(() => this.actions$.pipe(
-    ofType(vehicle_list_loading),
+    ofType(VehicleListLoading),
     switchMap( () => this.shipsService.page$ ),
     mergeMap((page) => this.shipsService.getVehicles(page)
       .pipe(
-        map(vehicle =>     vehicle_list_success({ vehicles: vehicle })),
-        catchError(error => of(vehicle_list_fail({ error }))  )
+        map(vehicle =>     VehicleListSuccess({ vehicles: vehicle })),
+        catchError(error => of(VehicleListFail({ error }))  )
       ))
   )
   );
@@ -25,10 +25,6 @@ export class vehicleEffects {
   constructor(
     private actions$: Actions,
     private shipsService: ShipsService
-  ) {  console.log('vehicleEffects');
-   }
-
-
-
+  ) {  }
 
 }

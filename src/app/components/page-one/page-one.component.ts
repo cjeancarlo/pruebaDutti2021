@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { PaginationConfig } from 'src/app/models/pagination.config.model';
 import { Vehicle } from 'src/app/models/vehicle.model';
 import { ShipsService } from 'src/app/services/ships.service';
-import { vehicle_list_loading } from 'src/app/store/actions';
+import { VehicleListLoading } from 'src/app/store/actions';
 import { AppState } from 'src/app/store/app.reducers';
 
 @Component({
@@ -10,12 +13,14 @@ import { AppState } from 'src/app/store/app.reducers';
   templateUrl: './page-one.component.html',
   styleUrls: ['./page-one.component.scss']
 })
-export class PageOneComponent implements OnInit {
+export class PageOneComponent implements OnInit, OnDestroy {
+
+  private ngUnsubscribe = new Subject();
 
   vehicles: Vehicle[];
   loading = false;
   loaded = false;
-  config: any;
+  config: PaginationConfig;
 
   constructor(private shipService: ShipsService, private store: Store<AppState>) {
     this.shipService.page.next(1);
@@ -27,25 +32,32 @@ export class PageOneComponent implements OnInit {
       currentPage: 1,
       totalItems: 0
     };
-    
 
-    this.store.dispatch(vehicle_list_loading());
-    this.store.select('vehicle').subscribe(vehicle => {
-      console.log(vehicle);
 
-      this.vehicles = vehicle.vehicles
-      this.loading = vehicle.loading;
-      this.loaded = vehicle.loaded;
-      this.config.totalItems = vehicle.count;
+    this.store.dispatch(VehicleListLoading());
+    this.store.select('vehicle')
+      .pipe(
+        takeUntil(this.ngUnsubscribe)
+      ).subscribe(vehicle => {
+        console.log(vehicle);
 
-    })
+        this.vehicles = vehicle.vehicles;
+        this.loading = vehicle.loading;
+        this.loaded = vehicle.loaded;
+        this.config.totalItems = vehicle.count;
+      });
 
   }
 
-  pageChanged(event){
-     this.config.currentPage = event;
-     this.shipService.page.next(event);
-     this.store.dispatch(vehicle_list_loading());
+  pageChanged(event) {
+    this.config.currentPage = event;
+    this.shipService.page.next(event);
+    this.store.dispatch(VehicleListLoading());
   }
 
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
 }

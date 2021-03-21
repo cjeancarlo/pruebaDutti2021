@@ -9,7 +9,7 @@ import { PrincipalModule } from './components/principal/principal.module';
 // Components
 import { AppComponent } from './app.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-//environment
+// environment
 import { environment } from 'src/environments/environment';
 import { appReducers } from './store/app.reducers';
 import { EffectsModule } from '@ngrx/effects';

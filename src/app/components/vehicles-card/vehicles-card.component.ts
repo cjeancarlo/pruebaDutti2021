@@ -9,7 +9,7 @@ import { ShipsService } from 'src/app/services/ships.service';
 })
 export class VehiclesCardComponent implements OnInit {
 
-  
+
   @Input() vehicle: Vehicle;
   constructor(private shipService: ShipsService) { }
 
@@ -20,7 +20,7 @@ export class VehiclesCardComponent implements OnInit {
     return this.shipService.getObjId(this.vehicle);
   }
 
-  getFilmId(filmUrl:  string) {
+  getFilmId(filmUrl: string) {
     return this.shipService.getObjIdFromString(filmUrl);
   }
 }

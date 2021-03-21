@@ -1,6 +1,5 @@
-import  { shipsEffects} from './ship.effects'
-import  { peopleEffects} from './people.effects'
-import { vehicleEffects } from './vehicle.effects';
-
-export const effectsArray = [shipsEffects, peopleEffects, vehicleEffects];
+import { ShipsEffects } from './ship.effects';
+import { PeopleEffects } from './people.effects';
+import { VehicleEffects } from './vehicle.effects';
+export const effectsArray = [ShipsEffects, PeopleEffects, VehicleEffects];
 export * from './ship.effects';

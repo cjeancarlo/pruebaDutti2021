@@ -20,13 +20,13 @@ describe('ShipsDetailsComponent', () => {
     selector: 'pagination-controls',
     template: '<p>Mock Pagination controls Component</p>'
   })
-  class MockPaginationControls {}
-  @Pipe({name: 'paginate'})
+  class MockPaginationControls { }
+  @Pipe({ name: 'paginate' })
   class MockPipe implements PipeTransform {
-      transform(value: number): number {
-          //Do stuff here, if you want
-          return value;
-      }
+    transform(value: number): number {
+      // Do stuff here, if you want
+      return value;
+    }
   }
 
   beforeEach(waitForAsync(() => {
@@ -34,9 +34,9 @@ describe('ShipsDetailsComponent', () => {
       imports: [
         StoreModule.forRoot(appReducers),
         HttpClientModule, MatProgressSpinnerModule, FlexLayoutModule, MatCardModule, MatIconModule],
-      declarations: [ ShipsDetailsComponent, MockPaginationControls, MockPipe, ShipCardComponent ], 
+      declarations: [ShipsDetailsComponent, MockPaginationControls, MockPipe, ShipCardComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

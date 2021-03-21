@@ -1,11 +1,11 @@
 
 import { createReducer, on } from '@ngrx/store';
-import { list_loading, list_success, list_fail } from '../actions';
+import { ListLoading, ListSuccess, ListFail } from '../actions';
 import { Ships } from 'src/app/models/ships.model';
 
 
 
-export interface shipsState {
+export interface ShipsState {
   ships: Ships[];
   loaded: boolean;
   loading: boolean;
@@ -16,25 +16,24 @@ export interface shipsState {
 
 }
 
-const initState: shipsState = {
+const initState: ShipsState = {
   ships: [],
   loaded: false,
   loading: false,
   errors: null,
   count: 0,
-  next: '', 
+  next: '',
   previous: ''
+};
 
-}
-
-const _listLoading = (state: shipsState) => {
+const listLoading = (state: ShipsState) => {
   return {
     ...state,
     loading: true
-  }
-}
+  };
+};
 
-const _listsuccess = (state: shipsState, { ships  }) => {
+const listsuccess = (state: ShipsState, { ships }) => {
   return {
     ...state,
     loading: false,
@@ -42,13 +41,12 @@ const _listsuccess = (state: shipsState, { ships  }) => {
     ships: [...ships.results],
     count: ships.count,
     next: ships.next,
-    previous:  ships.previous
-    
-  }
-}
+    previous: ships.previous
+  };
+};
 
 
-const _listfail  = (state: shipsState, { error }) => {
+const listfail = (state: ShipsState, { error }) => {
   return {
     ...state,
     loading: false,
@@ -57,16 +55,16 @@ const _listfail  = (state: shipsState, { error }) => {
       status: error.status,
       message: error.message
     }
-  }
-}
+  };
+};
 
-const _shipsReducer = createReducer(
+const SHIPSREDUCER = createReducer(
   initState,
-  on(list_loading, _listLoading),
-  on(list_fail, _listfail),
-  on(list_success, _listsuccess)
+  on(ListLoading, listLoading),
+  on(ListFail, listfail),
+  on(ListSuccess, listsuccess)
 );
 
 export function shipsReducer(state, action) {
-  return _shipsReducer(state, action);
+  return SHIPSREDUCER(state, action);
 }

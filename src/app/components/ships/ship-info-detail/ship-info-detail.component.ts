@@ -12,7 +12,7 @@ import { ShipsService } from 'src/app/services/ships.service';
 export class ShipInfoDetailComponent implements OnInit {
 
   constructor(
-    private shipService :ShipsService,
+    private shipService: ShipsService,
     public dialogRef: MatDialogRef<ShipInfoDetailComponent>,
     @Inject(MAT_DIALOG_DATA) public ship: Ships) { }
 
@@ -21,11 +21,10 @@ export class ShipInfoDetailComponent implements OnInit {
   }
 
   get starshipId() {
-      return this.shipService.getObjId(this.ship);
+    return this.shipService.getObjId(this.ship);
   }
 
   onClose(): void {
     this.dialogRef.close();
   }
-
 }

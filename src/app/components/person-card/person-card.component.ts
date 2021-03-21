@@ -7,7 +7,7 @@ import { ShipsService } from 'src/app/services/ships.service';
   templateUrl: './person-card.component.html',
   styleUrls: ['./person-card.component.scss']
 })
-export class personCardComponent implements OnInit {
+export class PersonCardComponent implements OnInit {
 
   
   @Input() person: Person;

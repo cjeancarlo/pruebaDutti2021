@@ -1,10 +1,10 @@
 
 import { createReducer, on } from '@ngrx/store';
-import { vehicle_list_fail, vehicle_list_loading, vehicle_list_success } from '../actions';
+import { VehicleListFail, VehicleListLoading, VehicleListSuccess } from '../actions';
 import { Vehicle } from 'src/app/models/vehicle.model';
 
 
-export interface vehiclesState {
+export interface VehiclesState {
   vehicles: Vehicle[];
   loaded: boolean;
   loading: boolean;
@@ -15,24 +15,25 @@ export interface vehiclesState {
 
 }
 
-const initState: vehiclesState = {
+const initState: VehiclesState = {
   vehicles: [],
   loaded: false,
   loading: false,
   errors: null,
   count: 0,
-  next: '', 
+  next: '',
   previous: ''
-}
+};
 
-const _listLoading = (state: vehiclesState) => {
+
+const listLoading = (state: VehiclesState) => {
   return {
     ...state,
     loading: true
-  }
-}
+  };
+};
 
-const _listsuccess = (state: vehiclesState, { vehicles  }) => {
+const listsuccess = (state: VehiclesState, { vehicles }) => {
   return {
     ...state,
     loading: false,
@@ -40,12 +41,12 @@ const _listsuccess = (state: vehiclesState, { vehicles  }) => {
     vehicles: [...vehicles.results],
     count: vehicles.count,
     next: vehicles.next,
-    previous:  vehicles.previous
-  }
-}
+    previous: vehicles.previous
+  };
+};
 
 
-const _listfail  = (state: vehiclesState, { error }) => {
+const listfail = (state: VehiclesState, { error }) => {
   return {
     ...state,
     loading: false,
@@ -54,16 +55,16 @@ const _listfail  = (state: vehiclesState, { error }) => {
       status: error.status,
       message: error.message
     }
-  }
-}
+  };
+};
 
-const _vehiclesReducer = createReducer(
+const VEHICLESREDUCER = createReducer(
   initState,
-  on(vehicle_list_loading, _listLoading),
-  on(vehicle_list_fail, _listfail),
-  on(vehicle_list_success, _listsuccess)
+  on(VehicleListLoading, listLoading),
+  on(VehicleListFail, listfail),
+  on(VehicleListSuccess, listsuccess)
 );
 
 export function vehiclesReducer(state, action) {
-  return _vehiclesReducer(state, action);
+  return VEHICLESREDUCER(state, action);
 }

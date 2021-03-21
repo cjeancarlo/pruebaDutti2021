@@ -1,50 +1,49 @@
 
 import { createReducer, on } from '@ngrx/store';
-import { AppState } from 'src/app/store/app.reducers'
+import { AppState } from 'src/app/store/app.reducers';
 
-import {get_ship_fail, get_ship_loading, get_ship_success } from '../actions';
+import {GetShipFail, GetShipLoading, GetShipSuccess } from '../actions';
 
 import { Ships } from 'src/app/models/ships.model';
 
 
 export interface ShipAppState extends AppState {
-  selected: selectedShipState;
+  selected: SelectedShipState;
 }
 
 
-export interface selectedShipState {
+export interface SelectedShipState {
   ship: Ships;
   loaded: boolean;
   loading: boolean;
   errors: any;
-
 }
 
-const initState: selectedShipState = {
+const initState: SelectedShipState = {
   ship: null,
   loaded: false,
   loading: false,
   errors: null,
-}
+};
 
-const _getShipLoading = (state: selectedShipState, { idShip  }) => {
+const getShipLoading = (state: SelectedShipState, { idShip  }) => {
   return {
     ...state,
     loading: true
-  }
-}
+  };
+};
 
-const _getShipsuccess = (state: selectedShipState, { ship  }) => {
+const getShipsuccess = (state: SelectedShipState, { ship  }) => {
   return {
     ...state,
     loading: false,
     loaded: true,
     ship: {...ship}
-  }
-}
+  };
+};
 
 
-const _getShipfail  = (state: selectedShipState, { error }) => {
+const getShipfail  = (state: SelectedShipState, { error }) => {
   return {
     ...state,
     loading: false,
@@ -53,16 +52,16 @@ const _getShipfail  = (state: selectedShipState, { error }) => {
       status: error.status,
       message: error.message
     }
-  }
-}
+  };
+};
 
-const _seletedShipReducer = createReducer(
+const SELETEDSHIPREDUCER = createReducer(
   initState,
-  on(get_ship_loading, _getShipLoading),
-  on(get_ship_success, _getShipsuccess ),
-  on(get_ship_fail, _getShipfail)
+  on(GetShipLoading, getShipLoading),
+  on(GetShipSuccess, getShipsuccess ),
+  on(GetShipFail, getShipfail)
 );
 
 export function selectedShipReducer(state, action) {
-  return _seletedShipReducer(state, action);
+  return SELETEDSHIPREDUCER(state, action);
 }

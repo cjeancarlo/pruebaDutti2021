@@ -1,9 +1,9 @@
-import { Vehicle } from "./vehicle.model";
+import { Vehicle } from './vehicle.model';
 
 export interface VehicleResponse {
-    count:    number;
-    next:     string;
+    count: number;
+    next: string;
     previous: null;
-    results:  Vehicle[];
+    results: Vehicle[];
 }
 

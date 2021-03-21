@@ -1,15 +1,20 @@
-import { ActionReducerMap } from "@ngrx/store";
-import { shipsReducer, shipsState, selectedShipReducer, selectedShipState, peopleState, peopleReducer   } from "./reducers";
-import { vehiclesReducer, vehiclesState } from "./reducers/vehicle.reducer";
-
-
-
+import { ActionReducerMap } from '@ngrx/store';
+import {
+  vehiclesReducer,
+  VehiclesState,
+  shipsReducer,
+  ShipsState,
+  selectedShipReducer,
+  SelectedShipState,
+  PeopleState,
+  peopleReducer
+} from './reducers';
 export interface AppState {
-  data: shipsState,
-  people: peopleState,
-  vehicle: vehiclesState,
-  selected: selectedShipState
- }
+  data: ShipsState;
+  people: PeopleState;
+  vehicle: VehiclesState;
+  selected: SelectedShipState;
+}
 
 export const appReducers: ActionReducerMap<AppState> = {
   data: shipsReducer,

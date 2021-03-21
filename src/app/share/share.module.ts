@@ -30,9 +30,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 const MATERIAL: any[] = [
@@ -76,7 +76,6 @@ const COREMODULE: any[] = [
   FlexLayoutModule,
   NgxPaginationModule,
   SweetAlert2Module
-  
 ];
 @NgModule({
   declarations: [
@@ -86,6 +85,6 @@ const COREMODULE: any[] = [
     MATERIAL
   ],
   exports: [COREMODULE, MATERIAL],
-  
+
 })
 export class ShareModule { }

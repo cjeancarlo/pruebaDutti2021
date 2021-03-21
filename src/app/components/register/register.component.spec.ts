@@ -39,51 +39,51 @@ describe('RegisterComponent', () => {
   });
 
   it('name field validity', () => {
-    let name = component.registerForm.controls['name'];
+    const name = component.registerForm.controls['name'];
     expect(name.valid).toBeFalsy();
 
-    name.setValue("");
+    name.setValue('');
     expect(name.hasError('required')).toBeTruthy();
-    name.setValue("A");
+    name.setValue('A');
     expect(name.hasError('minlength', ['minlength'])).toEqual(false);
   });
 
 
   it('password field validity', () => {
-    let password = component.registerForm.controls['password'];
+    const password = component.registerForm.controls['password'];
     expect(password.valid).toBeFalsy();
 
-    password.setValue("");
+    password.setValue('');
     expect(password.hasError('required')).toBeTruthy();
-    password.setValue("A");
+    password.setValue('A');
     expect(password.hasError('minlength', ['minlength'])).toEqual(false);
   });
 
 
   it('email field validity', () => {
-    let email = component.registerForm.controls['email'];
+    const email = component.registerForm.controls['email'];
     expect(email.valid).toBeFalsy();
 
-    email.setValue("");
-      expect(email.hasError('required')).toBeTruthy();
-    email.setValue("A");
-      expect(email.hasError('minlength', ['minlength'])).toEqual(false);
-    email.setValue("badEmail");
-      expect(email.hasError('email')).toBeTruthy();
+    email.setValue('');
+    expect(email.hasError('required')).toBeTruthy();
+    email.setValue('A');
+    expect(email.hasError('minlength', ['minlength'])).toEqual(false);
+    email.setValue('badEmail');
+    expect(email.hasError('email')).toBeTruthy();
 
 
-   
+
   });
 
 
 
   it('submitting a form register  user', () => {
     expect(component.registerForm.valid).toBeFalsy();
-    component.registerForm.controls['email'].setValue("test@test.com");
-    component.registerForm.controls['name'].setValue("name");
-    component.registerForm.controls['password'].setValue("123456789");
+    component.registerForm.controls['email'].setValue('test@test.com');
+    component.registerForm.controls['name'].setValue('name');
+    component.registerForm.controls['password'].setValue('123456789');
     expect(component.registerForm.valid).toBeTruthy();
-    
+
   });
 
 
