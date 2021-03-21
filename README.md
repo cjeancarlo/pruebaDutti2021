@@ -35,11 +35,4 @@ Navigate to `http://localhost:4200/`.
 
 # Notas del desarrollador:
 
-para el punto 7 se implemento en el service "ships.service.ts" un objeto que actua como cache para evitar llamadas recurrentes y posiblemnte innecesarias al backEnd
-
-  private cache:{
-    ships$?: Observable<any>
-    people$?: Observable<any>;
-    vehicle$?: Observable<any>;
-  } = {};
 
